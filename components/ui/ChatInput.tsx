@@ -2,14 +2,20 @@
 import React from "react";
 import { Input } from "./input";
 import { supabaseBrowser } from "@/utils/supabase/client";
+import { toast } from "sonner";
 
 function ChatInput() {
   const supabase = supabaseBrowser();
 
   const handleSendMessage = async (message: string) => {
-    alert(message);
-
-    await supabase.from("messages").insert({ text: message });
+    await supabase
+      .from("messages")
+      .insert({ text: message })
+      .then((response) => {
+        if (response.error) {
+          toast.error(response.error.message);
+        }
+      });
   };
 
   return (
