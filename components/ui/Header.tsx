@@ -2,8 +2,11 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { supabaseBrowser } from "@/utils/supabase/client";
+import { User } from "@supabase/supabase-js";
 
-function Header() {
+function Header({ user }: { user: User | null }) {
+
+  
   const handleLoginWithGithub = () => {
     const supabase = supabaseBrowser();
     supabase.auth.signInWithOAuth({
@@ -22,7 +25,11 @@ function Header() {
           <h2 className="text-sm text-gray-400">2 online</h2>
         </div>
       </div>
-      <Button onClick={handleLoginWithGithub}>Login</Button>
+      {user ? (
+        <Button onClick={handleLoginWithGithub}>Logout</Button>
+      ) : (
+        <Button onClick={handleLoginWithGithub}>Login</Button>
+      )}
     </div>
   );
 }
