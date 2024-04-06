@@ -25,7 +25,8 @@ function Header({ user }: { user: User | null }) {
   };
 
   return (
-    <div className="p-5 border-b flex items-center justify-between">
+    <div className="h-20">
+    <div className="p-5 border-b flex items-center justify-between h-full">
       <div>
         <h1 className="text-xl font-bold">Daily Chat</h1>
         <div className="flex items-center flex-row gap-2 ">
@@ -38,6 +39,7 @@ function Header({ user }: { user: User | null }) {
       ) : (
         <Button onClick={handleLoginWithGithub}>Login</Button>
       )}
+    </div>
     </div>
   );
 }
