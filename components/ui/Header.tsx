@@ -3,10 +3,11 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { supabaseBrowser } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 
 function Header({ user }: { user: User | null }) {
+  const router = useRouter();
 
-  
   const handleLoginWithGithub = () => {
     const supabase = supabaseBrowser();
     supabase.auth.signInWithOAuth({
@@ -16,6 +17,13 @@ function Header({ user }: { user: User | null }) {
       },
     });
   };
+
+  const handleLogoutWithGithub = async () => {
+    const supabase = supabaseBrowser();
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
   return (
     <div className="p-5 border-b flex items-center justify-between">
       <div>
@@ -26,7 +34,7 @@ function Header({ user }: { user: User | null }) {
         </div>
       </div>
       {user ? (
-        <Button onClick={handleLoginWithGithub}>Logout</Button>
+        <Button onClick={handleLogoutWithGithub}>Logout</Button>
       ) : (
         <Button onClick={handleLoginWithGithub}>Login</Button>
       )}
