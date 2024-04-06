@@ -1,12 +1,15 @@
 "use client";
 import React from "react";
 import { Input } from "./input";
+import { supabaseBrowser } from "@/utils/supabase/client";
 
 function ChatInput() {
-  const handleSendMessage = (message: string) => {
+  const supabase = supabaseBrowser();
+
+  const handleSendMessage = async (message: string) => {
     alert(message);
 
-    
+    await supabase.from("messages").insert({ text: message });
   };
 
   return (
