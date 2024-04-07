@@ -26,20 +26,20 @@ function Header({ user }: { user: User | null }) {
 
   return (
     <div className="h-20">
-    <div className="p-5 border-b flex items-center justify-between h-full">
-      <div>
-        <h1 className="text-xl font-bold">Daily Chat</h1>
-        <div className="flex items-center flex-row gap-2 ">
-          <div className="h-4 w-4 bg-green-500 animate-pulse rounded-full" />
-          <h2 className="text-sm text-gray-400">2 online</h2>
+      <div className="p-5 border-b flex items-center justify-between h-full">
+        <div>
+          <h1 className="text-xl font-bold">Daily Chat</h1>
+          <div className="flex items-center flex-row gap-2 ">
+            <div className="h-4 w-4 bg-green-500 animate-pulse rounded-full" />
+            <h2 className="text-sm text-gray-400">2 online</h2>
+          </div>
         </div>
+        {user ? (
+          <Button onClick={handleLogoutWithGithub}>Logout</Button>
+        ) : (
+          <Button onClick={handleLoginWithGithub}>Login</Button>
+        )}
       </div>
-      {user ? (
-        <Button onClick={handleLogoutWithGithub}>Logout</Button>
-      ) : (
-        <Button onClick={handleLoginWithGithub}>Login</Button>
-      )}
-    </div>
     </div>
   );
 }
